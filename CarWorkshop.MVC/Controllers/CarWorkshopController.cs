@@ -58,9 +58,14 @@ namespace CarWorkshop.MVC.Controllers
         [Route("CarWorkshop/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(string encodedName)
         {
-            var carWorkshop = await _mediator.Send(new GetCarWorkshopByEncodedNameQuerry(encodedName));
+            var carWorkshopDto = await _mediator.Send(new GetCarWorkshopByEncodedNameQuerry(encodedName));
 
-            var model = _mapper.Map<EditCarWorkshopCommand>(carWorkshop);
+            if(!carWorkshopDto.IsEditable)
+            {
+                return RedirectToAction("DenyAccess", "Home");
+            }
+
+            var model = _mapper.Map<EditCarWorkshopCommand>(carWorkshopDto);
             return View(model);
         }
 
