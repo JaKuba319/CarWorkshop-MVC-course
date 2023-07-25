@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarWorkshop.Application.ApplicationUser;
 using CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Queries.GetAllCarWorkshops;
@@ -41,6 +42,7 @@ namespace CarWorkshop.MVC.Controllers
                 return View(command);
 
             }
+
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index)); 
         }
