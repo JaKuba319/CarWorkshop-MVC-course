@@ -26,5 +26,18 @@ namespace CarWorkshop.Infrastructure.Repositories
 
         public async Task<Domain.Entities.CarWorkshop> GetByEncodedName(string encodedName)
             => await _dbContext.CarWorkshops.Where(x => x.EncodedName == encodedName).FirstAsync();
+
+        public async Task EditCarWorkshop(Domain.Entities.CarWorkshop entity)
+        {
+            var oldEntity = await GetByEncodedName(entity.EncodedName);
+            oldEntity.Description = entity.Description;
+            oldEntity.About = entity.About;
+            oldEntity.ContactDetails.PhoneNumber = entity.ContactDetails.PhoneNumber;
+            oldEntity.ContactDetails.Street = entity.ContactDetails.Street;
+            oldEntity.ContactDetails.City = entity.ContactDetails.City;
+            oldEntity.ContactDetails.PostalCode = entity.ContactDetails.PostalCode;
+            
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
