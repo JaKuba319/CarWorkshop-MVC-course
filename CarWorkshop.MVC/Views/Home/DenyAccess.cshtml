@@ -1,2 +1,6 @@
-﻿<h1>You have no access to this operation!</h1>
-<div class="alert alert-danger">You have to be owner of the car workshop to edit!</div>
+﻿@model string
+<h1>You have no access to this operation!</h1>
+@if (!string.IsNullOrEmpty(Model))
+{
+<div class="alert alert-danger">@Model</div> 
+}

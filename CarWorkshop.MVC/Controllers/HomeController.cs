@@ -23,9 +23,9 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult DenyAccess()
+    public IActionResult DenyAccess(string message)
     {
-        return View();
+        return View("DenyAccess", message);
     }
 
     public IActionResult Privacy()

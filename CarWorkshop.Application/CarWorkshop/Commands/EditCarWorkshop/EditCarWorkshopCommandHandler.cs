@@ -22,7 +22,7 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop
             var entity = _mapper.Map<Domain.Entities.CarWorkshop>(request);
 
             var user = _userContext.GetCurrentUser();
-            var isEditable = user != null && user.Id == entity.CreatedById;
+            var isEditable = user != null && (user.Id == entity.CreatedById || user.IsInRole("Moderator"));
 
             if(!isEditable)
             {
