@@ -4,9 +4,12 @@ using CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Queries.GetAllCarWorkshops;
 using CarWorkshop.Application.CarWorkshop.Queries.GetCarWorkshopByEncodedName;
+using CarWorkshop.MVC.Extensions;
+using CarWorkshop.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CarWorkshop.MVC.Controllers
 {
@@ -21,11 +24,14 @@ namespace CarWorkshop.MVC.Controllers
             _mapper = mapper;
         }
 
+
         public async Task<IActionResult> Index()
         {
             var carWorkshops = await _mediator.Send(new GetAllCarWorkshopsQuerry());
             return View(carWorkshops);
         }
+
+
 
         [Authorize(Roles = "Owner")]
         public IActionResult Create() 
@@ -44,8 +50,12 @@ namespace CarWorkshop.MVC.Controllers
             }
 
             await _mediator.Send(command);
+
+            this.SetNotification("success", $"Created new carworkshop: {command.Name}");
+
             return RedirectToAction(nameof(Index)); 
         }
+
 
         [Route("CarWorkshop/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName)
@@ -54,6 +64,7 @@ namespace CarWorkshop.MVC.Controllers
 
             return View(carWorkShop);
         }
+
 
         [Route("CarWorkshop/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(string encodedName)
@@ -68,6 +79,7 @@ namespace CarWorkshop.MVC.Controllers
             var model = _mapper.Map<EditCarWorkshopCommand>(carWorkshopDto);
             return View(model);
         }
+
 
         [HttpPost]
         [Route("CarWorkshop/{encodedName}/Edit")]
