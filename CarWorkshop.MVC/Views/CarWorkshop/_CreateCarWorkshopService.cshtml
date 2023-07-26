@@ -1,0 +1,42 @@
+﻿@model CarWorkshop.Application.CarWorkshopService.Commands.CreateCarWorkshopServiceCommand
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCarWorkshopServiceModal">
+    Create new service
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createCarWorkshopServiceModal" tabindex="-1" role="dialog" aria-labelledby="createCarWorkshopServiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form asp-action="CreateCarWorkshopService" id="createCarWorkshopServiceModalForm" method="post">
+                <input asp-for="CarWorkshopEncodedName" class="form-control" hidden/>
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCarWorkshopServiceModalLabel">Create new service</h5>
+            </div>
+            <div class="modal-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cost" class="control-label"></label>
+                    <input asp-for="Cost" class="form-control" />
+                    <span asp-validation-for="Cost" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Create" />
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
