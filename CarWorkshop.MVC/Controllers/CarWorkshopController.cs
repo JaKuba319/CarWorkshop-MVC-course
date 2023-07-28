@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using CarWorkshop.Application.ApplicationUser;
 using CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Queries.GetAllCarWorkshops;
@@ -7,11 +6,9 @@ using CarWorkshop.Application.CarWorkshop.Queries.GetCarWorkshopByEncodedName;
 using CarWorkshop.Application.CarWorkshopService.Commands;
 using CarWorkshop.Application.CarWorkshopService.Queries.GetCarWorkshopServices;
 using CarWorkshop.MVC.Extensions;
-using CarWorkshop.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace CarWorkshop.MVC.Controllers
 {

@@ -1,2 +1,11 @@
-﻿<h1>About</h1>
-<div class="alert alert-success">About works!</div>
+﻿@model About
+
+<h1>@Model.Title</h1>
+<div class="alert alert-success">@Model.Description</div>
+<h3>Tags:</h3>
+<ul>
+@foreach(var tag in Model.Tags)
+{
+    <li>@tag</li>
+}
+</ul>

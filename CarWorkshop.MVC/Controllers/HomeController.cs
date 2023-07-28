@@ -20,7 +20,20 @@ public class HomeController : Controller
 
     public IActionResult About()
     {
-        return View();
+        var data = new About() 
+        { 
+            Title = "About",
+            Description = "Test description.",
+            Tags = new()
+            {
+                "Car",
+                "Workshop",
+                "Car services",
+                "Mechanic"
+            }
+        };
+
+        return View(data);
     }
 
     public IActionResult DenyAccess(string message)
